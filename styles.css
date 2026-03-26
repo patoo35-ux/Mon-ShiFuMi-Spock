@@ -1,0 +1,140 @@
+*{                                  /*sélecteur universel pour réinitialiser les marges et les paddings de tous les éléments*/
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+div {
+    justify-content: center;
+    display: flex;
+}
+
+#wrapper {
+    width: 100%;
+    max-width: 800px; /* On empêche le jeu d'être trop large sur PC */
+    display: flex;
+    flex-direction: column; /* On aligne les blocs verticalement */
+    align-items: center;
+    gap: 30px; /* Espace constant entre chaque bloc (titre, score, boutons) */
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #2c3e50;
+    color: white;
+    /* On centre tout dans le body plutôt que le wrapper */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* min-height est mieux que height pour le responsive */
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.tableauAffichage {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Les scores passent l'un sous l'autre sur mobile */
+}
+
+.scoreZone {
+    flex: 1; /* Les deux blocs de score prennent la même largeur */
+    min-width: 150px;
+    padding: 20px;
+    border-radius: 15px;
+    background: #34495e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.scoreZone span {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #f1c40f;
+}
+#zoneDeCombat {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 20px 0;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 20px;
+}
+
+.bulle {
+    background-color: #ffffff;
+    color: #2c3e50;
+    padding: 15px 25px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 140px;
+    box-shadow: 0 4px 0 #bdc3c7; /* Effet 3D léger */
+    transition: all 0.3s ease;
+}
+
+/* Petit effet quand le contenu change */
+.bulle:not(:empty) {
+    animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    100% { transform: scale(1); }
+}
+
+.vs {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #e74c3c;
+    text-shadow: 2px 2px 0px #000;
+}
+.choixBoutons {
+    display: flex;
+    flex-wrap: wrap; /* Très important pour le responsive ! */
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 12px;
+    border: none;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-3px); /* Effet de levée */
+    background-color: #e5753d;
+    color: white;
+}
+
+#message {
+    font-size: 1.3rem;
+    min-height: 3em; /* Réserve l'espace pour le texte */
+    line-height: 1.5;
+}
+
+#rejouer {
+    background-color: #27ae60;
+    color: white;
+    margin-top: 10px;
+}
+
+/* --- MEDIA QUERIES (Pour les petits écrans) --- */
+@media (max-width: 600px) {
+    h1 { font-size: 1.5rem; }
+    .choixBoutons { gap: 10px; }
+    button { padding: 10px 15px; width: 45%; } /* Boutons plus larges sur mobile */
+}

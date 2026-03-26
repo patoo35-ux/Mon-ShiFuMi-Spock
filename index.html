@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mon Shifumi</title>
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/script.js" defer></script>
+</head>
+
+<body>
+<div id="wrapper">
+    <h1>Pierre, Papier, Ciseaux, Lézard, Spock</h1>
+
+    <div class="tableauAffichage">
+        <div class="scoreZone" id="zoneJoueur">
+            <p>Joueur:
+            <span id="scoreJoueur">0</span>
+            </p>
+        </div>
+        <div class="scoreZone" id="zoneOrdinateur">
+            <p>Ordinateur:
+            <span id="scoreOrdinateur">0</span>
+            </p>
+        </div>
+    </div>
+
+<div id="zoneDeCombat">
+    <div class="bulle" id="visuelChoixCombatJoueur">?</div>
+    <div class="vs">VS</div>
+    <div class="bulle" id="visuelChoixCombatOrdinateur">?</div>
+</div>
+
+    <p id="message">En garde !<br>Choisissez votre arme !</p>
+
+    <div class="choixBoutons">
+        <button id="pierre">Pierre</button>
+        <button id="feuille">Feuille</button>
+        <button id="ciseaux">Ciseaux</button>
+        <button id="lezard">Lézard</button>
+        <button id="spock">Spock</button>
+    </div>
+
+    <button id="rejouer">Rejouer une partie</button>
+        
+    </div>
+</div>    
+</body>
+</html>
