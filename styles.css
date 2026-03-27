@@ -28,12 +28,6 @@ body {
     min-height: 100vh; /* min-height est mieux que height pour le responsive */
     padding: 20px;
 }
-
-#imageJeu {
-    display: block;      /* Pour pouvoir la centrer avec margin */
-    margin: 20px auto;   /* 20px d'espace en haut/bas, centré horizontalement */
-    max-width: 250px;    /* Limite la largeur pour ne pas écraser le titre */
-    height: auto;        /* Garde les proportions de l'image (pas de déformation) */
     
 }
 h1 {
@@ -84,16 +78,6 @@ h1 {
     min-width: 140px;
     box-shadow: 0 4px 0 #bdc3c7; /* Effet 3D léger */
     transition: all 0.3s ease;
-}
-
-/* Petit effet quand le contenu change */
-.bulle:not(:empty) {
-    animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-@keyframes pop {
-    0% { transform: scale(0.8); }
-    100% { transform: scale(1); }
 }
 
 .vs {
