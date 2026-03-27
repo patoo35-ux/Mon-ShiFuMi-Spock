@@ -29,6 +29,13 @@ body {
     padding: 20px;
 }
 
+#imageJeu {
+    display: block;      /* Pour pouvoir la centrer avec margin */
+    margin: 20px auto;   /* 20px d'espace en haut/bas, centré horizontalement */
+    max-width: 250px;    /* Limite la largeur pour ne pas écraser le titre */
+    height: auto;        /* Garde les proportions de l'image (pas de déformation) */
+    
+}
 h1 {
     font-size: 2rem;
     margin-bottom: 10px;
@@ -130,6 +137,14 @@ button:hover {
     background-color: #27ae60;
     color: white;
     margin-top: 10px;
+}
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    font-size: 1rem;
+    color: #bdc3c7;
 }
 
 /* --- MEDIA QUERIES (Pour les petits écrans) --- */
