@@ -1,4 +1,4 @@
-*{                                  /*sélecteur universel pour réinitialiser les marges et les paddings de tous les éléments*/
+*{                          /*sélecteur universel pour réinitialiser les marges et les paddings de tous les éléments*/
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,36 +10,51 @@ div {
 }
 
 #wrapper {
-    width: 100%;
-    max-width: 800px; /* On empêche le jeu d'être trop large sur PC */
-    display: flex;
+    width: 100%;            /* On utilise toute la largeur disponible du navigateur (page responsive). */
+    max-width: 800px;       /* On empêche le jeu d'être trop large sur PC */
+    display: flex;/* On utilse la flebox pour centrer et espacer les éléments affichés */
     flex-direction: column; /* On aligne les blocs verticalement */
-    align-items: center;
-    gap: 30px; /* Espace constant entre chaque bloc (titre, score, boutons) */
+    align-items: center;    /* On cente les éléments horizontalement */
+    gap: 30px;              /* Espace constant entre chaque bloc (titre, score, boutons) */
 }
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #2c3e50;
-    color: white;
-    /* On centre tout dans le body plutôt que le wrapper */
-    display: flex;
-    justify-content: center;
+    font-size:1.3rem;
+    font-weight:bold;
+    background-color: #2c3e50;  /*Bleu sombre pour l'arrière-plan. */
+    color: white;               /* Blanc pour le texte */
+     /* On centre tout dans le body plutôt que le wrapper */
+    display: flex;                /*Flexbox pour centrer le contenu du body*/
     align-items: center;
-    min-height: 100vh; /* min-height est mieux que height pour le responsive */
-    padding: 20px;
+    min-height: 100vh;            /* min-height est mieux que height pour le responsive */
+    padding: 20px;          /* marge intérieure */          
 }
+
+#imageJeu {
+    display: block;      /* Pour pouvoir la centrer avec margin */
+    margin: 20px auto;   /* 20px d'espace en haut/bas, centré horizontalement */
+    max-width: 550px;    /* Limite la largeur pour ne pas écraser le titre */
+    height: auto;        /* Garde les proportions de l'image (pas de déformation) */
     
 }
 h1 {
     font-size: 2rem;
     margin-bottom: 10px;
 }
+
 .tableauAffichage {
     display: flex;
     justify-content: center;
     gap: 20px;
     width: 100%;
     flex-wrap: wrap; /* Les scores passent l'un sous l'autre sur mobile */
+
+    /* Ombre du cadre */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px; 
+    background: rgba(255, 255, 255, 0.155); 
 }
 
 .scoreZone {
@@ -55,17 +70,18 @@ h1 {
     display: block;
     font-size: 2.5rem;
     font-weight: bold;
-    color: #f1c40f;
+    color: #f3b122;
 }
 #zoneDeCombat {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 60px;
     margin: 20px 0;
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 10px; 
+    background: rgba(255, 255, 255, 0.155); 
 }
 
 .bulle {
@@ -81,21 +97,21 @@ h1 {
 }
 
 .vs {
-    font-size: 1.5rem;
+    font-size: 2.1rem;
     font-weight: 900;
-    color: #e74c3c;
+    color: #f28740;
     text-shadow: 2px 2px 0px #000;
 }
 .choixBoutons {
     display: flex;
     flex-wrap: wrap; /* Très important pour le responsive ! */
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
 }
 
 button {
     padding: 15px 20px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
     border-radius: 12px;
@@ -106,32 +122,45 @@ button {
 }
 
 button:hover {
-    transform: translateY(-3px); /* Effet de levée */
+    transform: translateY(-4px); /* Effet de levée */
     background-color: #e5753d;
     color: white;
 }
 
 #message {
-    font-size: 1.3rem;
+    font-size: 1.9rem;
     min-height: 3em; /* Réserve l'espace pour le texte */
-    line-height: 1.5;
+    line-height: 1.9;
+    color: #f3b122;
 }
 
 #rejouer {
-    background-color: #27ae60;
+    font-size: 1.3rem;
+    background: #34495e;
     color: white;
     margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 10px; 
+    background: rgba(255, 255, 255, 0.155); 
 }
+
+button:hover {
+    transform: translateY(-4px); /* Effet de levée */
+    background-color: #e5753d;
+    color: white;
+}
+
 footer {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 20px 0;
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #bdc3c7;
 }
 
-/* --- MEDIA QUERIES (Pour les petits écrans) --- */
+/* --- MEDIA QUERIES (Pour les petits écrans) --- (proposition IA)*/
 @media (max-width: 600px) {
     h1 { font-size: 1.5rem; }
     .choixBoutons { gap: 10px; }
