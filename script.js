@@ -20,7 +20,7 @@ const conditionsGagnantes = {
                 spock: "🖖 spock",
         };
 
-// 2. J' initialise les scores :
+// 2. J' initialise les scores : en début de partie, les scores sont nulles.
 let scoreJoueur = 0;
 let scoreOrdinateur = 0;
 
@@ -34,13 +34,15 @@ const afficheScoreOrdinateur = document.querySelector("#scoreOrdinateur");
 const boutons = document.querySelectorAll(".choixBoutons button");
 const btnRejouer = document.querySelector("#rejouer");
 
+const afficheMessageFinal = document.querySelector
+
 // 4. Fonction pour que l'ordinateur choisisse au hasard :
 // Appel des clés de l'objet conditionsGagnantes, qui sont les choix possibles pour l'ordinateur :
 function lOrdinateurChoisit() {
     const choixPossibles = Object.keys(conditionsGagnantes);
     return choixPossibles[Math.floor(Math.random() * choixPossibles.length)];// Renvoi d'un choix aléatoire parmi les choix possibles.
 }
-        // Math.random() génère un nombre aléatoire entre 0 (inclus) et 1 (exclus), que l'on multiplie par la longueur du tableau des choix 
+        // Math.random() génère un nombre aléatoire entre 0 (inclus) et 1 (exclus), que l'on multiplie par la longueur du tableau des choix possibles.
         // possibles pour obtenir un index valide. 
         // Math.floor() arrondit ce nombre à l'entier inférieur pour obtenir un index entier.
 
@@ -93,5 +95,5 @@ btnRejouer.addEventListener("click", () => {    // Sur le bouton "Rejouer", ajou
     afficheScoreOrdinateur.textContent = "0";   // 
     visuelJoueur.textContent = "?";             // Mise à jour des indicateur de choix.
     visuelOrdi.textContent = "?";
-    afficheMessage.innerHTML = "En garde !<br>Choisissez votre arme !"; // Le message d'accueil est réaffiché?
+    afficheMessage.innerHTML = "En garde !<br>Choisissez votre arme !"; // Le message d'accueil est réaffiché.
 });
