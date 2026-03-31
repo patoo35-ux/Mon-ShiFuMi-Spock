@@ -1,162 +1,99 @@
-*{                          /*sélecteur universel pour réinitialiser les marges et les paddings de tous les éléments*/
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+//alert()
 
-div {
-    justify-content: center;
-    display: flex;
-}
+// 1. Je stocke dans une variable, de type objet, les élements gagnants de chaque choix : victimes et actions associées.
+// Je crée un objet qui associe chaque choix à un autre objet contenant les choix qu'il bat et l'action correspondante.
+// Chaque choix est une clé de l'objet conditionsGagnantes, et sa valeur est un autre objet qui contient les choix qu'il bat et l'action associée.
+const conditionsGagnantes = {
+    pierre: { ciseaux: "écrase", lezard: "écrase" },
+    feuille: { pierre: "couvre", spock: "désavoue" },
+    ciseaux: { feuille: "découpent", lezard: "décapitent" },
+    lezard: { spock: "empoisonne", feuille: "mange" },
+    spock: { ciseaux: "écrabouille", pierre: "vaporise" }
+};    
+        // Pour le fun : je transforme le texte en Emoji + Texte : cf. https://emojipedia.org/
+        // Je crée un objet qui associe chaque choix à une icône correspondante (emoji + texte) pour l'affichage visuel.
+            const icones = {
+                pierre: "🪨 Pierre",
+                feuille: "📄 Feuille",
+                ciseaux: "✂️ Ciseaux",
+                lezard: "🦎 Lézard",
+                spock: "🖖 spock",
+        };
 
-#wrapper {
-    width: 100%;            /* On utilise toute la largeur disponible du navigateur (page responsive). */
-    max-width: 800px;       /* On empêche le jeu d'être trop large sur PC */
-    display: flex;/* On utilse la flebox pour centrer et espacer les éléments affichés */
-    flex-direction: column; /* On aligne les blocs verticalement */
-    align-items: center;    /* On cente les éléments horizontalement */
-    gap: 40px;              /* Espace constant entre chaque bloc (titre, score, boutons) */
-}
+// 2. J' initialise les scores : en début de partie, les scores sont nulles.
+let scoreJoueur = 0;
+let scoreOrdinateur = 0;
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size:1.3rem;
-    font-weight:bold;
-    background-color: #2c3e50;  /*Bleu sombre pour l'arrière-plan. */
-    color: white;               /* Blanc pour le texte */
-     /* On centre tout dans le body plutôt que le wrapper */
-    display: flex;                /*Flexbox pour centrer le contenu du body*/
-    align-items: center;
-    min-height: 100vh;            /* min-height est mieux que height pour le responsive */
-    padding: 20px;          /* marge intérieure */          
-}
+// 3. Je récupère les éléments HTML pour pouvoir les modifier plus tard :
+// (Note : # pour les id et . pour classe).
+const visuelJoueur = document.querySelector("#visuelChoixCombatJoueur");
+const visuelOrdi = document.querySelector("#visuelChoixCombatOrdinateur");
+const afficheMessage = document.querySelector("#message");
+const afficheScoreJoueur = document.querySelector("#scoreJoueur");
+const afficheScoreOrdinateur = document.querySelector("#scoreOrdinateur");
+const boutons = document.querySelectorAll(".choixBoutons button");
+const btnRejouer = document.querySelector("#rejouer");
 
-#imageJeu {
-    display: block;      /* Pour pouvoir la centrer avec margin */
-    margin: 20px auto;   /* 20px d'espace en haut/bas, centré horizontalement */
-    max-width: 550px;    /* Limite la largeur pour ne pas écraser le titre */
-    height: auto;        /* Garde les proportions de l'image (pas de déformation) */
+const afficheMessageFinal = document.querySelector
+
+// 4. Fonction pour que l'ordinateur choisisse au hasard :
+// Appel des clés de l'objet conditionsGagnantes, qui sont les choix possibles pour l'ordinateur :
+function lOrdinateurChoisit() {
+    const choixPossibles = Object.keys(conditionsGagnantes);
+    return choixPossibles[Math.floor(Math.random() * choixPossibles.length)];// Renvoi d'un choix aléatoire parmi les choix possibles.
+}
+        // Math.random() génère un nombre aléatoire entre 0 (inclus) et 1 (exclus), que l'on multiplie par la longueur du tableau des choix possibles.
+        // possibles pour obtenir un index valide. 
+        // Math.floor() arrondit ce nombre à l'entier inférieur pour obtenir un index entier.
+
+// 5. Fonction principale déclenchée au clic par le joueur (utilisateur): jouer
+function jouer(choixJoueur) {
+    const choixOrdinateur = lOrdinateurChoisit();
+
+    // Affichage des Emojis
+    visuelJoueur.textContent = icones[choixJoueur];// La clé est le choix du joueur pour récupérer l'icône correspondante dans l'objet icones 
+    visuelOrdi.textContent = icones[choixOrdinateur];  //pour afficher visuellement le choix du joueur.
+
+// 6. Je compare les choix du joueur et de l'ordinateur pour déterminer le résultat : 
+// Je crée une variable pour stocker le message du resultat qui sera affiché sur le navigateur après la comparaison des choix du joueur et de l'ordinateur.
+    let messageResultat = "";
+    console.log("Le joueur a choisi : " + choixJoueur);
+    if (choixJoueur === choixOrdinateur) {
+        messageResultat = `Égalité ! <br> Vous avez tous les deux choisi ${choixJoueur}.`;
+    }                   // En cas d'égalité, on affiche un message spécifique et les scores changes.
+ 
+    // Vérification : choix de l'ordinateur est une clé dans l'objet du choix du joueur : 
+   
+    else if (conditionsGagnantes[choixJoueur][choixOrdinateur]) {                       // Si vrai, le joueur a gagné
+        scoreJoueur++;                                                                  // Incrémentation du score du joueur : +1
+        let action = conditionsGagnantes[choixJoueur][choixOrdinateur];                 // Récupération de l'action associée à la victoire du joueur et
+        messageResultat = `Gagné ! ${choixJoueur} ${action} ${choixOrdinateur}.`;       // de l'objet conditionsGagnantes : choix du joueur et choix de l'ordinateur.
+    }                                                                                   // Construction du message : Victoire du joueur. 
     
+    else {                                                                              // Sinon, l'ordinateur a gagné.
+        scoreOrdinateur++;                                                              // Incrémentation du score du joueur : +1
+        let action = conditionsGagnantes[choixOrdinateur][choixJoueur];                 // Récupération de l'action associée à la victoire de l'ordinateur et 
+        messageResultat = `Perdu... ${choixOrdinateur} ${action} ${choixJoueur}.`;      // Construction du message : Défaite du joueur.
+    }
+    
+    // Mise à jour de l'affichage
+    afficheMessage.innerHTML = messageResultat;
+    afficheScoreJoueur.textContent = scoreJoueur;
+    afficheScoreOrdinateur.textContent = scoreOrdinateur;
 }
-h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
+// 7. J'écoute les clics sur les boutons pour déclencher la fonction jouer avec le choix du joueur
+boutons.forEach(btn => {                        // Sur chaque bouton, ajout d'un écouteur d'évènement "click" qui lance la fonction joueur via le choix du joueur (id du bouton).               
+    btn.addEventListener("click", () => {       // Lorsque le joueur clique sur un bouton, la fonction jouer est appelée via le choix du joueur.
+        jouer(btn.id);                          // Le choix du joueur est déterminé par l'id du bouton cliqué.
+    });
+});
 
-.tableauAffichage {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    flex-wrap: wrap; /* Les scores passent l'un sous l'autre sur mobile */
-
-    /* Ombre du cadre */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
-    padding: 20px;
-    border-radius: 10px; 
-    background: rgba(255, 255, 255, 0.155); 
-}
-
-.scoreZone {
-    flex: 1; /* Les deux blocs de score prennent la même largeur */
-    min-width: 150px;
-    padding: 20px;
-    border-radius: 15px;
-    background: #34495e;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.scoreZone span {
-    display: block;
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #f3b122;
-}
-#zoneDeCombat {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 100px;
-    margin: 20px 40px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
-    padding: 20px 100px;
-    border-radius: 10px; 
-    background: rgba(255, 255, 255, 0.155); 
-}
-
-.bulle {
-    background-color: #ffffff;
-    color: #2c3e50;
-    padding: 5px 30px;
-    border-radius: 15px;
-    font-weight: bold;
-    font-size: 1.5rem;
-    min-width: 175px;
-    box-shadow: 0 4px 0 #bdc3c7; /* Effet 3D léger */
-    transition: all 0.3s ease;
-}
-
-.vs {
-    font-size: 2.1rem;
-    font-weight: 900;
-    color: #f28740;
-    text-shadow: 2px 2px 0px #000;
-}
-.choixBoutons {
-    display: flex;
-    flex-wrap: wrap; /* Très important pour le responsive ! */
-    justify-content: center;
-    gap: 25px;
-}
-
-button {
-    padding: 15px 30px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 12px;
-    border: none;
-    background-color: #ecf0f1;
-    color: #2c3e50;
-    transition: all 0.2s ease;
-}
-
-button:hover {
-    transform: translateY(-4px); /* Effet de levée */
-    background-color: #e5753d;
-    color: white;
-}
-
-#message {
-    font-size: 1.9rem;
-    min-height: 3em; /* Réserve l'espace pour le texte */
-    line-height: 1.9;
-    color: #f3b122;
-}
-
-#rejouer {
-    font-size: 1.3rem;
-    background: #34495e;
-    color: white;
-    margin-top: 40px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
-    padding:20px 145px 20px;
-    border-radius: 10px; 
-    background: rgba(255, 255, 255, 0.155); 
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-    font-size: 0.8rem;
-    color: #bdc3c7;
-}
-
-/* --- MEDIA QUERIES (Pour les petits écrans) --- (proposition IA)*/
-@media (max-width: 600px) {
-    h1 { font-size: 1.5rem; }
-    .choixBoutons { gap: 10px; }
-    button { padding: 10px 15px; width: 45%; } /* Boutons plus larges sur mobile */
-}
+// 8. Reset lorsque le joueur clique sur le bouton "Rejouer", les scores et l'affichage se réinitialisent :
+btnRejouer.addEventListener("click", () => {    // Sur le bouton "Rejouer", ajout d'un écouteur d'évènement "click" qui lance la réinitialisation.L
+    scoreJoueur = 0; scoreOrdinateur = 0;       // Mise à zéro des scores.
+    afficheScoreJoueur.textContent = "0";       // Mise à jour des scores affichés.
+    afficheScoreOrdinateur.textContent = "0";   // 
+    visuelJoueur.textContent = "?";             // Mise à jour des indicateur de choix.
+    visuelOrdi.textContent = "?";
+    afficheMessage.innerHTML = "En garde !<br>Choisissez votre arme !"; // Le message d'accueil est réaffiché.
+});
