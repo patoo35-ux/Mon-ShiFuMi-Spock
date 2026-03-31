@@ -15,7 +15,7 @@ div {
     display: flex;/* On utilse la flebox pour centrer et espacer les éléments affichés */
     flex-direction: column; /* On aligne les blocs verticalement */
     align-items: center;    /* On cente les éléments horizontalement */
-    gap: 30px;              /* Espace constant entre chaque bloc (titre, score, boutons) */
+    gap: 40px;              /* Espace constant entre chaque bloc (titre, score, boutons) */
 }
 
 body {
@@ -76,10 +76,10 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 60px;
-    margin: 20px 0;
+    gap: 100px;
+    margin: 20px 40px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
-    padding: 20px;
+    padding: 20px 100px;
     border-radius: 10px; 
     background: rgba(255, 255, 255, 0.155); 
 }
@@ -87,11 +87,11 @@ h1 {
 .bulle {
     background-color: #ffffff;
     color: #2c3e50;
-    padding: 15px 25px;
+    padding: 5px 30px;
     border-radius: 15px;
     font-weight: bold;
-    font-size: 1.1rem;
-    min-width: 140px;
+    font-size: 1.5rem;
+    min-width: 175px;
     box-shadow: 0 4px 0 #bdc3c7; /* Effet 3D léger */
     transition: all 0.3s ease;
 }
@@ -110,7 +110,7 @@ h1 {
 }
 
 button {
-    padding: 15px 20px;
+    padding: 15px 30px;
     font-size: 1.5rem;
     font-weight: bold;
     cursor: pointer;
@@ -138,17 +138,11 @@ button:hover {
     font-size: 1.3rem;
     background: #34495e;
     color: white;
-    margin-top: 10px;
+    margin-top: 40px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
-    padding: 20px;
+    padding:20px 145px 20px;
     border-radius: 10px; 
     background: rgba(255, 255, 255, 0.155); 
-}
-
-button:hover {
-    transform: translateY(-4px); /* Effet de levée */
-    background-color: #e5753d;
-    color: white;
 }
 
 footer {
